@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Dump debug_mode
-      run: echo "Is authorship analysis enabled: ${{ inputs.authorship_analysis }}"
+      run: echo "Is authorship analysis enabled? ${{ inputs.authorship_analysis }}"
       shell: bash
     
     - uses: actions/checkout@v2
