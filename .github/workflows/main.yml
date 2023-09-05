@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Generate report (Main)
+    - name: Generate report (Check)
       if: ${{ !inputs.authorship_analysis }}
       run: bash ./run.sh
     
