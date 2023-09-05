@@ -15,27 +15,21 @@ jobs:
 
     steps:
     - name: Dump debug_mode
-      if: ${{ inputs.authorship_analysis }}
-      run: echo "Authorship analysis enabled ${{ inputs.authorship_analysis }}"
+      run: echo "Is authorship analysis enabled: ${{ inputs.authorship_analysis }}"
       shell: bash
     
-    - name: Dump debug_mode
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: pip install requests
+    
+    - name: Generate report
       if: ${{ !inputs.authorship_analysis }}
-      run: echo "Authorship analysis disabled ${{ inputs.authorship_analysis }}"
-      shell: bash
+      run: bash ./run.sh
     
-    # - uses: actions/checkout@v2
-    
-    # - name: Install dependencies
-    #   run: pip install requests
-    
-    # - name: Generate report
-    #   if: not inputs.authorship_analysis
-    #   run: bash ./run.sh
-    
-    # - name: Generate report
-    #   if: inputs.authorship_analysis
-    #   run: bash ./run_authorship_analysis.sh
+    - name: Generate report
+      if: ${{ inputs.authorship_analysis }}
+      run: bash ./run_authorship_analysis.sh
     
     # - name: Deploy GitHub pages
     #   uses: peaceiris/actions-gh-pages@v3
