@@ -3,9 +3,9 @@ name: CI
 on: 
   workflow_dispatch:
     inputs:
-        name:
-          type: boolean
+        authorship_analysis:
           description: "Enable authorship analysis?"
+          type: boolean
           required: true
           default: false
 
@@ -14,11 +14,18 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Dump debug_mode
+      run: echo "Is authorship analysis enabled? ${{ string(inputs.authorship_analysis) }}"
+      shell: bash
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: pip install requests
     - name: Generate report
+      if: not inputs.authorship_analysis
       run: bash ./run.sh
+    - name: Generate report
+      if: inputs.authorship_analysis
+      run: bash ./run_authorship_analysis.sh
     - name: Deploy GitHub pages
       uses: peaceiris/actions-gh-pages@v3
       with:
