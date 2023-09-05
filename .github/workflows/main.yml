@@ -16,12 +16,12 @@ jobs:
     steps:
     - name: Dump debug_mode
       if: ${{ inputs.authorship_analysis }}
-      run: echo "Authorship analysis enabled"
+      run: echo "Authorship analysis enabled ${{ inputs.authorship_analysis }}"
       shell: bash
     
     - name: Dump debug_mode
       if: ${{ !inputs.authorship_analysis }}
-      run: echo "Authorship analysis disabled"
+      run: echo "Authorship analysis disabled ${{ inputs.authorship_analysis }}"
       shell: bash
     
     # - uses: actions/checkout@v2
