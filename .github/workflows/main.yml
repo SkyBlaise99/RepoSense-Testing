@@ -15,22 +15,33 @@ jobs:
 
     steps:
     - name: Dump debug_mode
-      run: echo "Is authorship analysis enabled? ${{ string(inputs.authorship_analysis) }}"
-      shell: bash
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: pip install requests
-    - name: Generate report
-      if: not inputs.authorship_analysis
-      run: bash ./run.sh
-    - name: Generate report
       if: inputs.authorship_analysis
-      run: bash ./run_authorship_analysis.sh
-    - name: Deploy GitHub pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./reposense-report
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: Rebuild pages at 
+      run: echo "Authorship analysis enabled"
+      shell: bash
+    
+    - name: Dump debug_mode
+      if: not inputs.authorship_analysis
+      run: echo "Authorship analysis disabled"
+      shell: bash
+    
+    # - uses: actions/checkout@v2
+    
+    # - name: Install dependencies
+    #   run: pip install requests
+    
+    # - name: Generate report
+    #   if: not inputs.authorship_analysis
+    #   run: bash ./run.sh
+    
+    # - name: Generate report
+    #   if: inputs.authorship_analysis
+    #   run: bash ./run_authorship_analysis.sh
+    
+    # - name: Deploy GitHub pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./reposense-report
+    #     user_name: 'github-actions[bot]'
+    #     user_email: 'github-actions[bot]@users.noreply.github.com'
+    #     commit_message: Rebuild pages at 
