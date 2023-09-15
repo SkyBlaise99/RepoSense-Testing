@@ -1,4 +1,4 @@
-name: CI
+name: CI (Artifact)
 
 on: 
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Generate report (Main)
+    - name: Generate report
       if: ${{ !inputs.authorship_analysis }}
       run: bash ./run.sh
     
@@ -31,11 +31,8 @@ jobs:
       if: ${{ inputs.authorship_analysis }}
       run: bash ./run_authorship_analysis.sh
     
-    # - name: Deploy GitHub pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./reposense-report
-    #     user_name: 'github-actions[bot]'
-    #     user_email: 'github-actions[bot]@users.noreply.github.com'
-    #     commit_message: Rebuild pages at 
+    - name: Save artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: reposense-report
+        path: /home/runner/work/tp-dashboard/tp-dashboard/reposense-report
