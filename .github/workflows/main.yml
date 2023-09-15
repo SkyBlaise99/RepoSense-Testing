@@ -1,4 +1,4 @@
-name: CI (Artifact)
+name: CI
 
 on: 
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Generate report
+    - name: Generate report (Artifact)
       if: ${{ !inputs.authorship_analysis }}
       run: bash ./run.sh
     
