@@ -22,6 +22,9 @@ jobs:
     
     - name: Install dependencies
       run: pip install requests
+
+    - name: Report memory usage
+      run: free -m
     
     - name: Generate report (Cache Git Log)
       if: ${{ !inputs.authorship_analysis }}
@@ -30,7 +33,10 @@ jobs:
     - name: Generate report
       if: ${{ inputs.authorship_analysis }}
       run: bash ./run_authorship_analysis.sh
-    
+
+    - name: Report memory usage
+      run: free -m
+      
     # - name: Deploy GitHub pages
     #   uses: peaceiris/actions-gh-pages@v3
     #   with:
