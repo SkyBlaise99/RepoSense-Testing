@@ -12,7 +12,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Dump debug_mode
       run: echo "Is authorship analysis enabled? ${{ inputs.authorship_analysis }}"
@@ -23,8 +23,8 @@ jobs:
     - name: Install dependencies
       run: pip install requests
 
-    - name: Report memory usage
-      run: free -m
+    - name: Collect Workflow Telemetry
+      uses: runforesight/workflow-telemetry-action@v1 
     
     - name: Generate report (Cache Git Log)
       if: ${{ !inputs.authorship_analysis }}
