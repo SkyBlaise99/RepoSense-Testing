@@ -1,4 +1,5 @@
 name: CI
+run-name: ${{ inputs.workflow_description }}
 
 on: 
   workflow_dispatch:
@@ -8,11 +9,15 @@ on:
           type: boolean
           required: true
           default: true
+        workflow_description:
+          description: "Workflow's Description"
+          type: string
+          required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Dump debug_mode
       run: echo "Is authorship analysis enabled? ${{ inputs.authorship_analysis }}"
@@ -22,6 +27,11 @@ jobs:
     
     - name: Install dependencies
       run: pip install requests
+
+    - name: Collect Workflow Telemetry
+      uses: runforesight/workflow-telemetry-action@v1
+      with:
+        theme: "dark"
     
     - name: Generate report (Statistics)
       if: ${{ !inputs.authorship_analysis }}
@@ -30,12 +40,3 @@ jobs:
     - name: Generate report
       if: ${{ inputs.authorship_analysis }}
       run: bash ./run_authorship_analysis.sh
-    
-    # - name: Deploy GitHub pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./reposense-report
-    #     user_name: 'github-actions[bot]'
-    #     user_email: 'github-actions[bot]@users.noreply.github.com'
-    #     commit_message: Rebuild pages at 
