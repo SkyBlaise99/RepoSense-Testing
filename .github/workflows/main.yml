@@ -1,3 +1,4 @@
+name: CI
 run-name: ${{ inputs.workflow_description }}
 
 on: 
