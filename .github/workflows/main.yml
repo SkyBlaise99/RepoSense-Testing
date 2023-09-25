@@ -31,7 +31,7 @@ jobs:
     - name: Collect Workflow Telemetry
       uses: runforesight/workflow-telemetry-action@v1
       with:
-        theme: dark
+        theme: "dark"
     
     - name: Generate report (Main)
       if: ${{ !inputs.authorship_analysis }}
