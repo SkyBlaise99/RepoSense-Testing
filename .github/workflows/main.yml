@@ -1,4 +1,4 @@
-name: CI
+name: ${{ inputs.workflow_description }}
 
 on: 
   workflow_dispatch:
@@ -8,6 +8,10 @@ on:
           type: boolean
           required: true
           default: true
+        workflow_description:
+          description: "Workflow's Description"
+          type: string
+          default: ${{ GITHUB_REF##*/ }}
 
 jobs:
   deploy:
@@ -25,6 +29,8 @@ jobs:
 
     - name: Collect Workflow Telemetry
       uses: runforesight/workflow-telemetry-action@v1
+      with:
+        theme: "dark"
     
     - name: Generate report (Main)
       if: ${{ !inputs.authorship_analysis }}
