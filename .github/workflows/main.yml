@@ -12,7 +12,7 @@ on:
         workflow_description:
           description: "Workflow's Description"
           type: string
-          default: ${{ GITHUB_REF##*/ }}
+          required: true
 
 jobs:
   deploy:
