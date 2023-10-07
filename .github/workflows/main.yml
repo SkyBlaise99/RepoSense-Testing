@@ -40,3 +40,9 @@ jobs:
     - name: Generate report
       if: ${{ inputs.authorship_analysis }}
       run: bash ./run_authorship_analysis.sh
+
+    - name: Save artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: reposense-report
+        path: /home/runner/work/tp-dashboard/tp-dashboard/reposense-report
