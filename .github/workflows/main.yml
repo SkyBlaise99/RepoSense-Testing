@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     
-    - name: Generate report (Cache Git Diff)
+    - name: Generate report (Cache Git Diff V2)
       if: ${{ !inputs.authorship_analysis }}
       run: bash ./run.sh
     
