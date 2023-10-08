@@ -39,5 +39,5 @@ jobs:
     - name: Save artifact
       uses: actions/upload-artifact@v3
       with:
-        name: reposense-report
+        name: reposense-report-${{ inputs.workflow_description }}
         path: /home/runner/work/tp-dashboard/tp-dashboard/reposense-report
