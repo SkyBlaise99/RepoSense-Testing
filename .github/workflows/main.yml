@@ -13,6 +13,11 @@ on:
           description: "Workflow's Description"
           type: string
           required: true
+        originality_threshold:
+          description: "Originality Threshold"
+          type: number
+          required: true
+          default: '-1'
 
 jobs:
   deploy:
@@ -35,8 +40,4 @@ jobs:
     
     - name: Generate report (Statistics)
       if: ${{ !inputs.authorship_analysis }}
-      run: bash ./run.sh
-    
-    - name: Generate report
-      if: ${{ inputs.authorship_analysis }}
-      run: bash ./run_authorship_analysis.sh
+      run: bash ./run.sh ${{ inputs.authorship_analysis }} ${{ inputs.originality_threshold }}
