@@ -13,11 +13,11 @@ on:
           description: "Workflow's Description"
           type: string
           required: true
-        dissimilarity_threshold:
-          description: "Dissimilarity Threshold"
+        originality_threshold:
+          description: "Originality Threshold"
           type: number
           required: true
-          default: '0.51'
+          default: '-1'
 
 jobs:
   deploy:
@@ -34,7 +34,7 @@ jobs:
       run: pip install requests
     
     - name: Generate report (Artifact)
-      run: bash ./run.sh ${{ inputs.authorship_analysis }} ${{ inputs.dissimilarity_threshold }}
+      run: bash ./run.sh ${{ inputs.authorship_analysis }} ${{ inputs.originality_threshold }}
     
     - name: Save artifact
       uses: actions/upload-artifact@v3
