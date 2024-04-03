@@ -29,9 +29,4 @@ jobs:
       run: pip install requests
     
     - name: Generate report (Main)
-      if: ${{ !inputs.authorship_analysis }}
-      run: bash ./run.sh
-    
-    - name: Generate report
-      if: ${{ inputs.authorship_analysis }}
-      run: bash ./run_authorship_analysis.sh
+      run: bash ./run.sh ${{ inputs.authorship_analysis }}
